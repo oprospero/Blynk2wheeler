@@ -66,9 +66,9 @@ void left_stop() {
 }
 
 void left_forward(int pwr) {
-//  digitalWrite(motor_l1, HIGH);
+  digitalWrite(motor_l1, HIGH);
   digitalWrite(motor_l2, LOW);
-  analogWrite(motor_l1, pwr);
+//  analogWrite(motor_l1, pwr);
 //  motor11.low();
 //  motor12.high();
 }
@@ -87,9 +87,9 @@ void right_stop() {
 
 void right_forward(int pwr) {
   
-//  digitalWrite(motor_r1, HIGH);
+  digitalWrite(motor_r1, HIGH);
   digitalWrite(motor_r2, LOW);
-  analogWrite(motor_r1, pwr);
+//  analogWrite(motor_r1, pwr);
 //  motor21.low();
 //  motor22.high();
 }
@@ -101,7 +101,7 @@ void right_reverse() {
 }
 
 void drive_left_wheel(int pwr) {
-  if (pwr == 0)
+  if (pwr > -100 && pwr < 100)
     left_stop();
   else if (pwr > 0)
     left_forward(pwr);
@@ -110,7 +110,7 @@ void drive_left_wheel(int pwr) {
 }
 
 void drive_right_wheel(int pwr) {
-  if (pwr == 0)
+  if (pwr > -100 && pwr < 100)
     right_stop();
   else if (pwr > 0)
     right_forward(pwr);
@@ -121,7 +121,7 @@ void drive_right_wheel(int pwr) {
 
 void bot_move(int x, int y) {
   int spd = y - 512;
-  int rot = (x - 512) / 2;
+  int rot = (x - 512);
 
 //  PT(F("spd: "));PTL(spd);
 //  PT(F("rot: "));PTL(rot);
@@ -129,8 +129,8 @@ void bot_move(int x, int y) {
   int pwr_left_wheel = spd - rot;
   int pwr_right_wheel = spd + rot;
   
-//  PT(F("pl: "));PTL(pwr_left_wheel);
-//  PT(F("pr: "));PTL(pwr_right_wheel);
+  PT(F("pl: "));PTL(pwr_left_wheel);
+  PT(F("pr: "));PTL(pwr_right_wheel);
 
   drive_left_wheel(pwr_left_wheel);
   drive_right_wheel(pwr_right_wheel);
